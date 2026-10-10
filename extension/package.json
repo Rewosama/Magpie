@@ -1,0 +1,29 @@
+{
+  "name": "social-content-saver-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome Extension for saving social media posts",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
+    "lint": "tsc --noEmit",
+    "test:rls": "echo 'Run: supabase test db (requires supabase start)'"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.332",
+    "@vitest/coverage-v8": "^2.0.0",
+    "esbuild": "0.25.12",
+    "jsdom": "^25.0.0",
+    "typescript": "5.6.3",
+    "vitest": "^2.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2"
+  },
+  "license": "UNLICENSED"
+}

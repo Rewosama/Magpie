@@ -1,0 +1,116 @@
+/**
+ * Magpie Toast Notification Styles
+ *
+ * Two modifier classes apply platform-matching appearance (Requirement 11.2):
+ *   .magpie-toast--instagram  — white card with indigo accent, rounded-xl
+ *   .magpie-toast--x          — dark card (#1d1f23), white text, pill button
+ *
+ * The stylesheet is injected via the manifest's content_scripts `css` array
+ * AND inlined by toast.ts (via a <style> tag) so the component is
+ * self-contained even when loaded outside of a full extension build.
+ *
+ * Requirements: 11.1, 11.2, 11.3, 11.6
+ */
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+
+.magpie-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647; /* maximum z-index so the toast always appears on top */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  max-width: 420px;
+  width: max-content;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+/* ── Instagram platform styling ────────────────────────────────────────── */
+
+.magpie-toast--instagram {
+  background: #ffffff;
+  color: #262626;
+  border-radius: 12px; /* Tailwind rounded-xl */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+}
+
+.magpie-toast--instagram .magpie-toast__message {
+  color: #262626;
+  flex: 1;
+}
+
+.magpie-toast--instagram .magpie-toast__change {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #5851db; /* Instagram indigo accent */
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.magpie-toast--instagram .magpie-toast__change:hover {
+  background: rgba(88, 81, 219, 0.08);
+}
+
+.magpie-toast--instagram .magpie-toast__change:focus-visible {
+  outline: 2px solid #5851db;
+  outline-offset: 2px;
+}
+
+/* ── X / Twitter platform styling ──────────────────────────────────────── */
+
+.magpie-toast--x {
+  background: #1d1f23;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.magpie-toast--x .magpie-toast__message {
+  color: #e7e9ea; /* X's near-white body text */
+  flex: 1;
+}
+
+.magpie-toast--x .magpie-toast__change {
+  background: none;
+  border: 1px solid rgba(231, 233, 234, 0.35);
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 9999px; /* X uses pill-shaped buttons */
+  color: #e7e9ea;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.magpie-toast--x .magpie-toast__change:hover {
+  background: rgba(231, 233, 234, 0.1);
+}
+
+.magpie-toast--x .magpie-toast__change:focus-visible {
+  outline: 2px solid #1d9bf0; /* X blue for focus ring */
+  outline-offset: 2px;
+}

@@ -1,0 +1,534 @@
+
+      /* ── Reset ──────────────────────────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ── Base ───────────────────────────────────────────────────────────────── */
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          sans-serif;
+        font-size: 14px;
+        color: #1a1a1a;
+        background: #ffffff;
+        width: 320px;
+        min-height: 200px;
+      }
+
+      #app {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+      }
+
+      /* ── Loading state ──────────────────────────────────────────────────────── */
+      .loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+      }
+
+      .loading-spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #e5e7eb;
+        border-top-color: #4f46e5;
+        border-radius: 50%;
+        animation: spin 0.75s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ── Login view ─────────────────────────────────────────────────────────── */
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 28px 20px 24px;
+        gap: 14px;
+      }
+
+      .login-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+        margin-bottom: 2px;
+      }
+
+      .login-logo {
+        width: 52px;
+        height: 52px;
+        background: #eef2ff;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2px;
+      }
+
+      .login-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #111827;
+        letter-spacing: -0.02em;
+      }
+
+      .login-subtitle {
+        font-size: 13px;
+        color: #6b7280;
+        line-height: 1.45;
+        max-width: 220px;
+        margin: 0 auto;
+      }
+
+      /* ── Buttons ────────────────────────────────────────────────────────────── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          opacity 0.15s ease,
+          box-shadow 0.15s ease;
+        white-space: nowrap;
+        line-height: 1.2;
+        text-decoration: none;
+      }
+
+      .btn:focus-visible {
+        outline: 2px solid #4f46e5;
+        outline-offset: 2px;
+      }
+
+      .btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      /* Google OAuth button */
+      .btn--google {
+        background: #ffffff;
+        color: #374151;
+        border: 1px solid #d1d5db;
+        width: 100%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn--google:hover:not(:disabled) {
+        background: #f9fafb;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn--google:active:not(:disabled) {
+        background: #f3f4f6;
+        box-shadow: none;
+      }
+
+      .btn__icon {
+        flex-shrink: 0;
+      }
+
+      /* Text / ghost button */
+      .btn--text {
+        background: transparent;
+        color: #6b7280;
+        border: none;
+        box-shadow: none;
+        padding: 5px 8px;
+        border-radius: 6px;
+      }
+
+      .btn--text:hover:not(:disabled) {
+        background: #f3f4f6;
+        color: #374151;
+      }
+
+      .btn--small {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      /* ── Error message ──────────────────────────────────────────────────────── */
+      .error-message {
+        padding: 10px 14px;
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: center;
+      }
+
+      /* ── Collection view ────────────────────────────────────────────────────── */
+      .collections-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+      }
+
+      .collections-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px 12px;
+        border-bottom: 1px solid #f3f4f6;
+        gap: 8px;
+      }
+
+      .collections-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #111827;
+        letter-spacing: -0.01em;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .collections-list {
+        flex: 1;
+        padding: 4px 0 8px;
+        overflow-y: auto;
+        max-height: 320px;
+      }
+
+      .collection-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        transition: background 0.1s ease;
+        cursor: default;
+      }
+
+      .collection-item:hover {
+        background: #f9fafb;
+      }
+
+      .collection-name {
+        font-size: 14px;
+        color: #374151;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* ── Empty state ────────────────────────────────────────────────────────── */
+      .empty-message {
+        padding: 24px 16px;
+        text-align: center;
+        font-size: 13px;
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+
+      /* ── Collection item actions ─────────────────────────────────────────── */
+      .collection-actions {
+        display: flex;
+        gap: 2px;
+        flex-shrink: 0;
+        margin-left: 8px;
+      }
+
+      /* ── Primary button ──────────────────────────────────────────────────── */
+      .btn--primary {
+        background: #4f46e5;
+        color: #ffffff;
+        border: 1px solid transparent;
+      }
+
+      .btn--primary:hover:not(:disabled) {
+        background: #4338ca;
+      }
+
+      .btn--primary:active:not(:disabled) {
+        background: #3730a3;
+      }
+
+      /* ── Danger (delete) button ──────────────────────────────────────────── */
+      .btn--danger {
+        color: #b91c1c;
+      }
+
+      .btn--danger:hover:not(:disabled) {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+
+      /* ── Text input ──────────────────────────────────────────────────────── */
+      .input {
+        flex: 1;
+        min-width: 0;
+        padding: 5px 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        color: #374151;
+        background: #ffffff;
+        outline: none;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .input:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.12);
+      }
+
+      /* ── Collection item editing state ───────────────────────────────────── */
+      .collection-item--editing {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      /* ── Inline rename / add form ────────────────────────────────────────── */
+      .rename-form {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        width: 100%;
+      }
+
+      /* ── Add collection section ──────────────────────────────────────────── */
+      #add-collection-section {
+        padding: 8px 16px 10px;
+        border-top: 1px solid #f3f4f6;
+        margin-top: 4px;
+      }
+
+      .collection-add-toggle {
+        color: #4f46e5;
+        font-size: 13px;
+      }
+
+      .collection-add-toggle:hover:not(:disabled) {
+        background: #eef2ff;
+        color: #4338ca;
+      }
+
+      /* ── Inline error (inside form fields) ──────────────────────────────── */
+      .error-inline {
+        font-size: 12px;
+        color: #b91c1c;
+        line-height: 1.3;
+        margin: 0;
+      }
+
+      /* ── Error banner inside the collection list ─────────────────────────── */
+      .collection-error-banner {
+        margin: 6px 16px 4px;
+      }
+
+      /* ── Web link footer ────────────────────────────────────────────────────── */
+      .collections-footer {
+        padding: 8px 16px 4px;
+        border-top: 1px solid #f0f0f0;
+        margin-top: 4px;
+      }
+
+      .collections-web-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #6366f1 !important;
+        font-size: 11px !important;
+        opacity: 0.85;
+        text-decoration: none;
+        padding: 4px 0 !important;
+      }
+
+      .collections-web-link:hover {
+        opacity: 1;
+      }
+
+      /* ── Header actions ─────────────────────────────────────────────────── */
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .btn--icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 6px;
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
+      }
+      .btn--icon:hover { background: #f0f0f0; color: #444; }
+
+      .btn--logout {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 6px;
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s;
+      }
+      .btn--logout:hover { background: #fef2f2; }
+
+      /* ── Collections loading spinner ────────────────────────────────────── */
+      .collections-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 28px 0;
+      }
+
+      /* ── Web archive button ──────────────────────────────────────────────── */
+      .collections-footer {
+        padding: 8px 12px 6px;
+        border-top: 1px solid #f0f0f0;
+        margin-top: 4px;
+      }
+
+      .web-archive-btn {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        width: 100%;
+        background: #f5f3ff;
+        border: 1px solid #e0d9ff;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        color: #6366f1;
+        font-size: 11.5px;
+        font-weight: 500;
+        font-family: inherit;
+        transition: background 0.15s, border-color 0.15s;
+        text-align: left;
+      }
+      .web-archive-btn span { flex: 1; }
+      .web-archive-btn .arrow { opacity: 0.5; transition: transform 0.15s, opacity 0.15s; }
+      .web-archive-btn:hover { background: #ede9fe; border-color: #c4b5fd; }
+      .web-archive-btn:hover .arrow { transform: translateX(2px); opacity: 1; }
+
+      /* ── Dark mode ───────────────────────────────────────────────────────── */
+      :root.dark body,
+      .dark body {
+        background-color: #111827;
+        color: #f3f4f6;
+      }
+      .dark .collections-header { border-color: #374151; }
+      .dark .collections-footer { border-color: #374151; }
+      .dark .collection-item { border-bottom-color: #374151; }
+      .dark .collection-item:hover { background: #1f2937; }
+      .dark .input {
+        background: #1f2937;
+        border-color: #4b5563;
+        color: #f3f4f6;
+      }
+      .dark .btn--icon { color: #9ca3af; }
+      .dark .btn--icon:hover { background: #374151; color: #e5e7eb; }
+      .dark .btn--logout:hover { background: #450a0a; }
+      .dark .web-archive-btn {
+        background: #1e1b4b;
+        border-color: #3730a3;
+        color: #a5b4fc;
+      }
+      .dark .web-archive-btn:hover { background: #2e2b61; border-color: #4f46e5; }
+      .dark .empty-message { color: #6b7280; }
+      .dark .loading-spinner { border-color: rgba(165,180,252,0.2); border-top-color: #a5b4fc; }
+      .dark .collection-add-toggle { color: #a5b4fc; }
+      .dark .collection-add-toggle:hover { background: #1f2937; }
+      .dark .btn--text { color: #9ca3af; }
+      .dark .btn--text:hover { background: #1f2937; color: #e5e7eb; }
+      .dark .error-message { background: #450a0a; border-color: #7f1d1d; color: #fca5a5; }
+      .dark .rename-form .input { background: #1f2937; color: #f3f4f6; }
+      .dark .collections-title { color: #f3f4f6; }
+
+      /* ── Additional dark mode border fixes ──────────────────────────────── */
+      .dark .collections-list { border-color: #374151; }
+      .dark #add-collection-section { border-top-color: #374151 !important; }
+      .dark .collection-item { border-bottom-color: #374151 !important; }
+      .dark .collections-container {
+        background: #111827;
+      }
+
+      /* ── Collection name readability ─────────────────────────────────────── */
+      .collection-name {
+        font-weight: 500;
+        color: #1f2937;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        min-width: 0;
+        font-size: 13px;
+      }
+      .dark .collection-name { color: #f3f4f6; }
+
+      /* ── Login view dark mode ────────────────────────────────────────────── */
+      .dark .login-container {
+        background: #111827;
+      }
+      .dark .login-title {
+        color: #f3f4f6;
+      }
+      .dark .login-subtitle {
+        color: #9ca3af;
+      }
+      .dark .btn--google {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f3f4f6;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      }
+      .dark .btn--google:hover {
+        background: #374151;
+      }
+      .dark body {
+        background: #111827;
+      }
+
+      /* ── Login theme toggle button ──────────────────────────────────────── */
+      .login-theme-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      /* ── Body base dark ─────────────────────────────────────────────────── */
+      .dark .loading-container {
+        background: #111827;
+      }

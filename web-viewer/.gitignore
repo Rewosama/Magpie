@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Build output
+/.next/
+/out/
+
+# Environment files — never commit secrets
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+# Plain .env (already in root .gitignore, added here for defense in depth)
+.env
