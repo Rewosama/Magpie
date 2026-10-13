@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ultra-minimalist archive design system */
+@layer base {
+  :root {
+    /* Font variable is set by next/font in layout.tsx */
+    /* Safe area insets for PWA */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    /* PWA safe area padding */
+    padding-top: var(--safe-area-inset-top);
+    padding-bottom: var(--safe-area-inset-bottom);
+    padding-left: var(--safe-area-inset-left);
+    padding-right: var(--safe-area-inset-right);
+  }
+
+  /* Sharp corners everywhere */
+  * {
+    border-radius: 0 !important;
+  }
+
+  /* Exception: avatars stay circular */
+  .avatar-circle {
+    border-radius: 9999px !important;
+  }
+}
+
+@layer components {
+  /* Archive-style card */
+  .archive-card {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800;
+  }
+
+  /* Monospace text */
+  .mono {
+    font-family: var(--font-mono);
+    @apply text-xs tracking-tight;
+  }
+
+  /* Tag style: #hashtag */
+  .tag {
+    @apply mono text-zinc-500 dark:text-zinc-400;
+  }
+
+  .tag-active {
+    @apply mono text-zinc-900 dark:text-zinc-100;
+  }
+
+  /* Dashed border button */
+  .dashed-button {
+    @apply border border-dashed border-zinc-300 dark:border-zinc-700 
+           text-zinc-400 dark:text-zinc-500 
+           hover:border-zinc-400 dark:hover:border-zinc-600 
+           hover:text-zinc-600 dark:hover:text-zinc-400
+           transition-colors;
+  }
+
+  /* Platform tab */
+  .platform-tab {
+    @apply mono uppercase tracking-widest px-3 py-2 
+           text-zinc-400 dark:text-zinc-500 
+           hover:text-zinc-900 dark:hover:text-zinc-100
+           border-b-2 border-transparent
+           transition-colors;
+  }
+
+  .platform-tab-active {
+    @apply text-zinc-900 dark:text-zinc-100 border-zinc-900 dark:border-zinc-100;
+  }
+
+  /* Sidebar section header */
+  .sidebar-header {
+    @apply mono uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-3;
+  }
+
+  /* Input field - sharp */
+  .input-sharp {
+    @apply w-full px-3 py-2 
+           bg-white dark:bg-zinc-900 
+           border border-zinc-200 dark:border-zinc-800 
+           text-sm text-zinc-900 dark:text-zinc-100 
+           placeholder-zinc-400 dark:placeholder-zinc-500
+           focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600
+           transition-colors;
+  }
+
+  /* Button - minimal */
+  .btn-minimal {
+    @apply px-3 py-1.5 text-xs font-medium
+           border border-zinc-200 dark:border-zinc-800
+           bg-white dark:bg-zinc-900
+           text-zinc-700 dark:text-zinc-300
+           hover:bg-zinc-50 dark:hover:bg-zinc-800
+           transition-colors;
+  }
+
+  .btn-primary {
+    @apply px-3 py-1.5 text-xs font-medium
+           border border-zinc-900 dark:border-zinc-100
+           bg-zinc-900 dark:bg-zinc-100
+           text-white dark:text-zinc-900
+           hover:bg-zinc-800 dark:hover:bg-zinc-200
+           transition-colors;
+  }
+
+  .btn-danger {
+    @apply px-3 py-1.5 text-xs font-medium
+           border border-red-500
+           bg-transparent
+           text-red-500
+           hover:bg-red-500 hover:text-white
+           transition-colors;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.zinc.300") transparent;
+  }
+  .dark .scrollbar-thin {
+    scrollbar-color: theme("colors.zinc.700") transparent;
+  }
+
+  /* 1px border helpers */
+  .border-1 {
+    border-width: 1px;
+  }
+
+  /* Smooth grid animations */
+  .grid-animate {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* PWA safe area utilities */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  /* Minimum touch target size (44x44 for iOS, 48x48 for Android) */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Prevent text selection on touch (for interactive elements) */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
