@@ -1,0 +1,677 @@
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+body {
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: #18181b;
+  background: #ffffff;
+  width: 280px;
+  min-height: 200px;
+  letter-spacing: 0.02em;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+/* ── Monospace text ─────────────────────────────────────────────────────── */
+.mono {
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Loading state ──────────────────────────────────────────────────────── */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: #ffffff;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #e4e4e7;
+  border-top-color: #18181b;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Login view ─────────────────────────────────────────────────────────── */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 24px 16px 20px;
+  gap: 16px;
+  position: relative;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.login-logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo img {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.login-title {
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #18181b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.login-subtitle {
+  font-size: 10px;
+  color: #71717a;
+  line-height: 1.5;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #e4e4e7;
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #ffffff;
+  color: #18181b;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: #a1a1aa;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Google OAuth button */
+.btn--google {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #18181b;
+  padding: 10px 12px;
+}
+
+.btn--google:hover:not(:disabled) {
+  background: #fafafa;
+  border-color: #a1a1aa;
+}
+
+.btn__icon {
+  flex-shrink: 0;
+}
+
+/* Text / ghost button */
+.btn--text {
+  background: transparent;
+  color: #71717a;
+  border: none;
+  padding: 4px 6px;
+}
+
+.btn--text:hover:not(:disabled) {
+  color: #18181b;
+  background: #f4f4f5;
+}
+
+.btn--small {
+  font-size: 9px;
+  padding: 3px 6px;
+}
+
+/* ── Error message ──────────────────────────────────────────────────────── */
+.error-message {
+  padding: 8px 10px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ── Collection view ────────────────────────────────────────────────────── */
+.collections-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  background: #ffffff;
+}
+
+.collections-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid #e4e4e7;
+  gap: 8px;
+}
+
+.collections-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.header-logo img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.collections-title {
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: #18181b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.collections-list {
+  flex: 1;
+  padding: 4px 0;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.collection-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  transition: background 0.1s ease;
+  cursor: default;
+  border-bottom: 1px solid #f4f4f5;
+}
+
+.collection-item:last-child {
+  border-bottom: none;
+}
+
+.collection-item:hover {
+  background: #fafafa;
+}
+
+.collection-name {
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: #18181b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+.empty-message {
+  padding: 20px 12px;
+  text-align: center;
+  font-size: 10px;
+  color: #a1a1aa;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Collection item actions ─────────────────────────────────────────── */
+.collection-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+/* ── Primary button ──────────────────────────────────────────────────── */
+.btn--primary {
+  background: #18181b;
+  color: #ffffff;
+  border: 1px solid #18181b;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #27272a;
+  border-color: #27272a;
+}
+
+/* ── Danger (delete) button ──────────────────────────────────────────── */
+.btn--danger {
+  color: #dc2626;
+}
+
+.btn--danger:hover:not(:disabled) {
+  background: #fef2f2;
+}
+
+/* ── Text input ──────────────────────────────────────────────────────── */
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid #e4e4e7;
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: #18181b;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  border-color: #18181b;
+}
+
+.input::placeholder {
+  color: #a1a1aa;
+}
+
+/* ── Collection item editing state ───────────────────────────────────── */
+.collection-item--editing {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* ── Inline rename / add form ────────────────────────────────────────── */
+.rename-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+/* ── Add collection section ──────────────────────────────────────────── */
+#add-collection-section {
+  padding: 8px 12px;
+  border-top: 1px solid #e4e4e7;
+}
+
+.collection-add-toggle {
+  color: #71717a;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.collection-add-toggle:hover:not(:disabled) {
+  color: #18181b;
+}
+
+/* ── Inline error ──────────────────────────────────────────────────────── */
+.error-inline {
+  font-size: 10px;
+  color: #dc2626;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ── Error banner ──────────────────────────────────────────────────────── */
+.collection-error-banner {
+  margin: 6px 12px 4px;
+}
+
+/* ── Web link footer ────────────────────────────────────────────────────── */
+.collections-footer {
+  padding: 8px 12px;
+  border-top: 1px solid #e4e4e7;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 6px;
+}
+
+.footer-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border: 1px solid #e4e4e7;
+  background: transparent;
+  color: #71717a;
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.footer-link:hover {
+  color: #18181b;
+  background: #f4f4f5;
+  border-color: #a1a1aa;
+}
+
+.web-archive-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #18181b;
+  font-family:
+    "SF Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.web-archive-btn span {
+  flex: 1;
+}
+
+.web-archive-btn .arrow {
+  opacity: 0.4;
+  transition:
+    transform 0.15s,
+    opacity 0.15s;
+}
+
+.web-archive-btn:hover {
+  background: #f4f4f5;
+  border-color: #a1a1aa;
+}
+
+.web-archive-btn:hover .arrow {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+/* ── Header actions ─────────────────────────────────────────────────── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.btn--icon {
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 4px;
+  color: #71717a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.btn--icon:hover {
+  color: #18181b;
+  border-color: #e4e4e7;
+}
+
+.btn--logout {
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 4px;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.btn--logout:hover {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+/* ── Collections loading spinner ────────────────────────────────────── */
+.collections-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+}
+
+/* ── Login theme toggle button ──────────────────────────────────────── */
+.login-theme-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════ */
+/* ── Dark mode ───────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════ */
+
+:root.dark body,
+.dark body {
+  background-color: #09090b;
+  color: #fafafa;
+}
+
+.dark .loading-container {
+  background: #09090b;
+}
+
+.dark .loading-spinner {
+  border-color: #27272a;
+  border-top-color: #fafafa;
+}
+
+/* Login dark */
+.dark .login-container {
+  background: #09090b;
+}
+
+.dark .login-title {
+  color: #fafafa;
+}
+
+.dark .login-subtitle {
+  color: #71717a;
+}
+
+.dark .btn--google {
+  background: #18181b;
+  border-color: #27272a;
+  color: #fafafa;
+}
+
+.dark .btn--google:hover:not(:disabled) {
+  background: #27272a;
+  border-color: #3f3f46;
+}
+
+/* Collections dark */
+.dark .collections-container {
+  background: #09090b;
+}
+
+.dark .collections-header {
+  border-color: #27272a;
+}
+
+.dark .collections-title {
+  color: #fafafa;
+}
+
+.dark .collection-item {
+  border-bottom-color: #18181b;
+}
+
+.dark .collection-item:hover {
+  background: #18181b;
+}
+
+.dark .collection-name {
+  color: #fafafa;
+}
+
+.dark .input {
+  background: #18181b;
+  border-color: #27272a;
+  color: #fafafa;
+}
+
+.dark .input:focus {
+  border-color: #fafafa;
+}
+
+.dark .input::placeholder {
+  color: #52525b;
+}
+
+.dark .btn--icon {
+  color: #71717a;
+}
+
+.dark .btn--icon:hover {
+  color: #fafafa;
+  border-color: #27272a;
+}
+
+.dark .btn--logout:hover {
+  background: #450a0a;
+  border-color: #7f1d1d;
+}
+
+.dark .web-archive-btn {
+  background: #18181b;
+  border-color: #27272a;
+  color: #fafafa;
+}
+
+.dark .web-archive-btn:hover {
+  background: #27272a;
+  border-color: #3f3f46;
+}
+
+.dark .empty-message {
+  color: #52525b;
+}
+
+.dark .collection-add-toggle {
+  color: #71717a;
+}
+
+.dark .collection-add-toggle:hover:not(:disabled) {
+  color: #fafafa;
+}
+
+.dark .btn--text {
+  color: #71717a;
+}
+
+.dark .btn--text:hover:not(:disabled) {
+  background: #18181b;
+  color: #fafafa;
+}
+
+.dark .error-message {
+  background: #450a0a;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+
+.dark #add-collection-section {
+  border-top-color: #27272a;
+}
+
+.dark .collections-footer {
+  border-top-color: #27272a;
+}
+
+.dark .footer-link {
+  border-color: #27272a;
+  color: #71717a;
+}
+
+.dark .footer-link:hover {
+  color: #fafafa;
+  background: #18181b;
+  border-color: #3f3f46;
+}
+
+.dark .btn--primary {
+  background: #fafafa;
+  color: #09090b;
+  border-color: #fafafa;
+}
+
+.dark .btn--primary:hover:not(:disabled) {
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+}

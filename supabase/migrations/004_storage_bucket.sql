@@ -1,0 +1,41 @@
+-- Migration 004: Create Supabase Storage bucket for thumbnail persistence
+-- Requirements: 19.7, 19.8, 14.2
+-- Depends on: 003_rls_policies.sql (thumbnails_public_read policy must exist)
+--
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Context: What is already handled by earlier migrations
+-- ─────────────────────────────────────────────────────────────────────────────
+--
+-- thumbnail_url TEXT column:
+--   Already present in saved_posts via 002_saved_posts_table.sql (Requirement 19.8).
+--   No ALTER TABLE needed here.
+--
+-- Public-read RLS policy on storage.objects:
+--   Already created in 003_rls_policies.sql as `thumbnails_public_read`
+--   (FOR SELECT USING (bucket_id = 'thumbnails')).
+--   No policy creation needed here (Requirement 19.7).
+--
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Supabase Storage: create the thumbnails bucket
+-- Requirements: 19.7 — bucket must allow public read without authentication
+-- ─────────────────────────────────────────────────────────────────────────────
+--
+-- NOTE: Inserting into storage.buckets requires the service_role key (or the
+-- Supabase dashboard / Management API). The default anon / authenticated roles
+-- do not have INSERT on storage.buckets.
+--
+-- Run this migration via the Supabase SQL Editor (where the session runs as
+-- the postgres/service_role), or with:
+--   supabase db push
+--   supabase migration up
+-- Both of these execute as the postgres superuser, so no extra configuration
+-- is needed when using the Supabase CLI.
+--
+-- public = true  exposes the bucket so that objects are downloadable via the
+-- public URL (/storage/v1/object/public/thumbnails/<path>) without a JWT.
+-- The `thumbnails_public_read` policy added in migration 003 enforces this
+-- at the RLS layer as a defence-in-depth measure.
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('thumbnails', 'thumbnails', true)
+ON CONFLICT DO NOTHING;
